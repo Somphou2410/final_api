@@ -4,24 +4,23 @@ exports.getAllNotes = async (req, res) => {
   try {
     const data = await Note.getAll();
     res.status(200).json(data);
-    // console.log(data)
   } catch (error) {
     res.status(500).json({ message: "internal server error" });
   }
 };
 
-exports.getNoteByDate = (req, res) => {
-  const date = req.params.date;
-  Note.getByDate(date, (err, data) => {
-    if (err)
-      return res
-        .status(500)
-        .json({ message: "Error fetching note by date", error: err });
-    if (!data) return res.status(404).json({ message: "Note not found" });
+// exports.getNoteByDate = (req, res) => {
+//   const date = req.params.date;
+//   Note.getByDate(date, (err, data) => {
+//     if (err)
+//       return res
+//         .status(500)
+//         .json({ message: "Error fetching note by date", error: err });
+//     if (!data) return res.status(404).json({ message: "Note not found" });
 
-    res.json(data);
-  });
-};
+//     res.json(data);
+//   });
+// };
 exports.completeTodos = async (req, res) => {
   const { id } = req.params;
   try {
@@ -61,31 +60,31 @@ exports.createNote = async (req, res) => {
   }
 };
 
-exports.updateNote = (req, res) => {
-  const date = req.params.date;
-  const updatedContent = req.body.content;
+// exports.updateNote = (req, res) => {
+//   const date = req.params.date;
+//   const updatedContent = req.body.content;
 
-  if (!updatedContent) {
-    return res.status(400).json({ message: "content is required" });
-  }
+//   if (!updatedContent) {
+//     return res.status(400).json({ message: "content is required" });
+//   }
 
-  Note.update(date, updatedContent, (err, data) => {
-    if (err)
-      return res
-        .status(500)
-        .json({ message: "Error updating note", error: err });
-    res.json(data);
-  });
-};
+//   Note.update(date, updatedContent, (err, data) => {
+//     if (err)
+//       return res
+//         .status(500)
+//         .json({ message: "Error updating note", error: err });
+//     res.json(data);
+//   });
+// };
 
-exports.deleteNote = (req, res) => {
-  const date = req.params.date;
-  Note.delete(date, (err, data) => {
-    if (err)
-      return res
-        .status(500)
-        .json({ message: "Error deleting note", error: err });
+// exports.deleteNote = (req, res) => {
+//   const date = req.params.date;
+//   Note.delete(date, (err, data) => {
+//     if (err)
+//       return res
+//         .status(500)
+//         .json({ message: "Error deleting note", error: err });
 
-    res.json({ message: "Note deleted" });
-  });
-};
+//     res.json({ message: "Note deleted" });
+//   });
+// };
